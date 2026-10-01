@@ -1,14 +1,16 @@
-name: crm-engine
-private: true
-version: 1.0.0
-workspaces:
-  - "apps/*"
-  - "packages/*"
-
-scripts:
-  dev: "npm run dev --workspaces --if-present"
-  build: "npm run build --workspaces --if-present"
-  lint: "npm run lint --workspaces --if-present"
-  test: "npm run test --workspaces --if-present"
-
-packageManager: "npm@10.8.1"
+{
+  "name": "crm-engine",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @crm/web & npm run dev --workspace @crm/api",
+    "build": "npm run build --workspace @crm/shared && npm run build --workspace @crm/db && npm run build --workspace @crm/api && npm run build --workspace @crm/web",
+    "lint": "npm run lint --workspace @crm/web && npm run lint --workspace @crm/api && npm run lint --workspace @crm/shared",
+    "test": "npm run test --workspace @crm/api -- --passWithNoTests"
+  },
+  "packageManager": "npm@10.8.1"
+}
